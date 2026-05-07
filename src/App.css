@@ -1,0 +1,215 @@
+/* --- 全体のベース --- */
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+  background-color: #f9f7f2; /* 優しい紙のような白 */
+  color: #333;
+}
+
+.museum-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- ヘッダー --- */
+.museum-header {
+  text-align: center;
+  padding: 40px 0;
+  border-bottom: 2px solid #e0dcd0;
+  margin-bottom: 30px;
+}
+
+.museum-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  letter-spacing: 0.2em;
+  color: #5d5c58;
+}
+
+/* --- 🌟 ナビゲーションメニュー --- */
+
+/* 「ここを押してね」という案内 */
+.exhibition-menu::before {
+  content: "👇 見たい部屋のボタンをクリック 👇";
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d35400; /* 目立つ優しいオレンジ色 */
+  margin-bottom: 20px;
+}
+
+/* メニュー全体を枠で囲って、目立たせる */
+.exhibition-menu {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  background-color: #ffffff; /* 白い背景を敷く */
+  padding: 25px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06); /* ふわっと影をつける */
+  border: 2px dashed #e0dcd0; /* 可愛らしい点線で囲む */
+}
+
+/* ボタンの共通設定（大きく、立体的に） */
+.exhibition-menu button {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid #c8c2b5;
+  background: #fdfdfc;
+  cursor: pointer;
+  border-radius: 30px;
+  color: #4a4a4a;
+  box-shadow: 0 5px 0 #dcd9d0;
+  transition: all 0.1s ease;
+}
+
+/* 押したときのへこむアニメーション（共通） */
+.exhibition-menu button:active {
+  transform: translateY(5px);
+  box-shadow: none !important; /* アクティブ時の影を強制的に消す */
+}
+
+/* --- 🎨 ボタンの色分け（常設展 vs 企画展） --- */
+
+/* ① 基本のボタン（本日の作品など）が選ばれたとき */
+.exhibition-menu button.btn-default.active {
+  background-color: #eb6e4b; /* テラコッタ */
+  color: white;
+  border-color: #c95535;
+  box-shadow: 0 5px 0 #bd4b2d;
+}
+
+/* ② 常設展示のボタン（落ち着いたグリーン系） */
+.exhibition-menu button.btn-permanent {
+  border-color: #a3c4a3; 
+  color: #3b7a3b;
+  box-shadow: 0 5px 0 #b1d0b1;
+}
+.exhibition-menu button.btn-permanent.active {
+  background-color: #559e55; 
+  color: white;
+  border-color: #3b7a3b;
+  box-shadow: 0 5px 0 #2d632d;
+}
+
+/* ③ 企画展のボタン（ワクワクするピンク・オレンジ系） */
+.exhibition-menu button.btn-special {
+  border-color: #ffb6c1; 
+  color: #d14769;
+  background-color: #fff0f5; /* ほんのりピンク背景 */
+  box-shadow: 0 5px 0 #ffc0cb;
+}
+.exhibition-menu button.btn-special.active {
+  background-color: #ff6b8b; 
+  color: white;
+  border-color: #d14769;
+  box-shadow: 0 5px 0 #b33956;
+}
+
+/* --- 🌟 期間限定バナー --- */
+.special-banner {
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.special-banner.info {
+  background-color: #e3f2fd;
+  border: 1px solid #90caf9;
+  color: #1565c0;
+}
+
+.special-banner.special {
+  background: linear-gradient(135deg, #fff9c4 0%, #ffecb3 100%);
+  border: 1px solid #ffe082;
+  color: #795548;
+  font-weight: bold;
+}
+
+/* --- グリッドレイアウト --- */
+.spotlight-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.spotlight-grid .art-card {
+  max-width: 600px;
+  width: 100%;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* --- 🖼️ アートカード --- */
+.art-card {
+  background: white;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  border-radius: 4px;
+}
+
+.art-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+}
+
+.art-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  display: block;
+}
+
+.art-info {
+  padding: 10px 5px;
+}
+
+.art-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  color: #444;
+}
+
+.art-comment {
+  background: #fdfdfd;
+  border-left: 3px solid #e0dcd0;
+  padding: 5px 10px;
+  margin-bottom: 15px;
+  font-style: italic;
+  color: #666;
+}
+
+.art-meta {
+  font-size: 0.8rem;
+  color: #bbb;
+  text-align: right;
+}
+
+/* --- ローディング・スマホ対応 --- */
+.loading-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f7f2;
+}
+
+@media (max-width: 600px) {
+  .museum-header h1 { font-size: 1.8rem; }
+  .gallery-grid { grid-template-columns: 1fr; }
+}
