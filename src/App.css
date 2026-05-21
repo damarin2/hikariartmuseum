@@ -137,11 +137,14 @@ body {
 .spotlight-grid {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* 🌟 追加：はみ出したら自動で下の行に折り返す魔法 */
+  gap: 30px;       /* 🌟 追加：絵と絵の間に、ギャラリーと同じ30pxの隙間をあける */
 }
 
 .spotlight-grid .art-card {
+  /* 🌟 変更：最大幅は保ちつつ、スマホでは100%、PCでは少し小さくして横に並びやすくする */
+  flex: 1 1 400px; 
   max-width: 600px;
-  width: 100%;
 }
 
 .gallery-grid {
