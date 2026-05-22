@@ -216,3 +216,38 @@ body {
   .museum-header h1 { font-size: 1.8rem; }
   .gallery-grid { grid-template-columns: 1fr; }
 }
+
+/* 名言コンテナ全体の基準サイズを少し小さくする */
+.quote-container {
+  font-size: 0.9rem; /* 1remが標準サイズ。0.9にすると少し小ぶりになります */
+  line-height: 1.5;  /* 行間を少し広げて読みやすくします */
+}
+
+/* 英語の名言（少し控えめでオシャレに） */
+.quote-en {
+  font-size: 0.85em;
+  color: #666666; /* 真っ黒ではなく濃いグレーにすると上品になります */
+  font-style: italic; /* 斜体にすると美術館のプレートっぽくなります！ */
+  margin-bottom: 4px;
+}
+
+/* 日本語の名言 */
+.quote-jp {
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+/* 作者名（ピカソなど） */
+.quote-author {
+  font-size: 0.8em;
+  color: #888888;
+  text-align: right; /* 作者名を右寄せにする */
+}
+
+/* 一番下の「© 2026 ひかりARTMUSEUM」 */
+.footer-bottom {
+  font-size: 0.75rem; /* コピーライトは一番小さくするのが一般的です */
+  color: #999999;
+  margin-top: 20px;
+}
