@@ -1,8 +1,7 @@
-/* --- 全体のベース --- */
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
-  background-color: #f9f7f2; /* 優しい紙のような白 */
+  background-color: #f9f7f2;
   color: #333;
 }
 
@@ -12,7 +11,6 @@ body {
   padding: 20px;
 }
 
-/* --- ヘッダー --- */
 .museum-header {
   text-align: center;
   padding: 40px 0;
@@ -27,91 +25,90 @@ body {
   color: #5d5c58;
 }
 
-/* --- 🌟 ナビゲーションメニュー --- */
-
-/* 「ここを押してね」という案内 */
 .exhibition-menu::before {
   content: "👇 見たい部屋のボタンをクリック 👇";
   width: 100%;
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #d35400; /* 目立つ優しいオレンジ色 */
+  color: #d35400;
   margin-bottom: 20px;
 }
 
-/* メニュー全体を枠で囲って、目立たせる */
 .exhibition-menu {
   display: flex;
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
   margin-bottom: 50px;
-  background-color: #ffffff; /* 白い背景を敷く */
+  background-color: #ffffff;
   padding: 25px 20px;
   border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06); /* ふわっと影をつける */
-  border: 2px dashed #e0dcd0; /* 可愛らしい点線で囲む */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  border: 2px dashed #e0dcd0;
 }
 
-/* ボタンの共通設定（大きく、立体的に） */
-.exhibition-menu button {
-  padding: 15px 30px;
+.exhibition-menu .btn-default,
+.exhibition-menu .btn-permanent,
+.exhibition-menu .btn-special {
+  display: inline-block;
+  padding: 12px 24px;
   font-size: 1.1rem;
-  font-weight: bold;
-  border: 2px solid #c8c2b5;
-  background: #fdfdfc;
-  cursor: pointer;
+  font-weight: 900;
+  border: 3px solid;
   border-radius: 30px;
-  color: #4a4a4a;
-  box-shadow: 0 5px 0 #dcd9d0;
+  cursor: pointer;
   transition: all 0.1s ease;
+  text-align: center;
 }
 
-/* 押したときのへこむアニメーション（共通） */
-.exhibition-menu button:active {
+.exhibition-menu a:active {
   transform: translateY(5px);
-  box-shadow: none !important; /* アクティブ時の影を強制的に消す */
+  box-shadow: none !important;
 }
 
-/* --- 🎨 ボタンの色分け（常設展 vs 企画展） --- */
+.exhibition-menu .btn-default {
+  background: #fcf9f2;
+  color: #7a6e5d;
+  border-color: #d1c8b4;
+  box-shadow: 0 5px 0 #d1c8b4;
+}
 
-/* ① 基本のボタン（本日の作品など）が選ばれたとき */
-.exhibition-menu button.btn-default.active {
-  background-color: #eb6e4b; /* テラコッタ */
+.exhibition-menu .btn-default.active {
+  background-color: #eb6e4b;
   color: white;
   border-color: #c95535;
   box-shadow: 0 5px 0 #bd4b2d;
 }
 
-/* ② 常設展示のボタン（落ち着いたグリーン系） */
-.exhibition-menu button.btn-permanent {
-  border-color: #a3c4a3; 
-  color: #3b7a3b;
-  box-shadow: 0 5px 0 #b1d0b1;
+.exhibition-menu .btn-permanent {
+  background-color: #f0f7f0;
+  color: #2e662e;
+  border-color: #8fba8f;
+  box-shadow: 0 5px 0 #8fba8f;
 }
-.exhibition-menu button.btn-permanent.active {
-  background-color: #559e55; 
+
+.exhibition-menu .btn-permanent.active {
+  background-color: #559e55;
   color: white;
   border-color: #3b7a3b;
   box-shadow: 0 5px 0 #2d632d;
 }
 
-/* ③ 企画展のボタン（ワクワクするピンク・オレンジ系） */
-.exhibition-menu button.btn-special {
-  border-color: #ffb6c1; 
-  color: #d14769;
-  background-color: #fff0f5; /* ほんのりピンク背景 */
-  box-shadow: 0 5px 0 #ffc0cb;
+.exhibition-menu .btn-special {
+  background-color: #fff0f5;
+  color: #c23356;
+  border-color: #ff9eb0;
+  box-shadow: 0 5px 0 #ff9eb0;
 }
-.exhibition-menu button.btn-special.active {
-  background-color: #ff6b8b; 
+
+.exhibition-menu .btn-special.active {
+  background-color: #ff6b8b;
   color: white;
   border-color: #d14769;
   box-shadow: 0 5px 0 #b33956;
 }
 
-/* --- 🌟 期間限定バナー --- */
 .special-banner {
   padding: 20px;
   border-radius: 12px;
@@ -133,17 +130,15 @@ body {
   font-weight: bold;
 }
 
-/* --- グリッドレイアウト --- */
 .spotlight-grid {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* 🌟 追加：はみ出したら自動で下の行に折り返す魔法 */
-  gap: 30px;       /* 🌟 追加：絵と絵の間に、ギャラリーと同じ30pxの隙間をあける */
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .spotlight-grid .art-card {
-  /* 🌟 変更：最大幅は保ちつつ、スマホでは100%、PCでは少し小さくして横に並びやすくする */
-  flex: 1 1 400px; 
+  flex: 1 1 400px;
   max-width: 600px;
 }
 
@@ -153,7 +148,6 @@ body {
   gap: 30px;
 }
 
-/* --- 🖼️ アートカード --- */
 .art-card {
   background: white;
   padding: 15px;
@@ -173,7 +167,7 @@ body {
 .art-image-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: contain; 
+  object-fit: contain;
   display: block;
 }
 
@@ -202,7 +196,6 @@ body {
   text-align: right;
 }
 
-/* --- ローディング・スマホ対応 --- */
 .loading-screen {
   height: 100vh;
   display: flex;
@@ -217,37 +210,56 @@ body {
   .gallery-grid { grid-template-columns: 1fr; }
 }
 
-/* 名言コンテナ全体の基準サイズを少し小さくする */
 .quote-container {
-  font-size: 0.9rem; /* 1remが標準サイズ。0.9にすると少し小ぶりになります */
-  line-height: 1.5;  /* 行間を少し広げて読みやすくします */
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-/* 英語の名言（少し控えめでオシャレに） */
 .quote-en {
   font-size: 0.85em;
-  color: #666666; /* 真っ黒ではなく濃いグレーにすると上品になります */
-  font-style: italic; /* 斜体にすると美術館のプレートっぽくなります！ */
+  color: #666666;
+  font-style: italic;
   margin-bottom: 4px;
 }
 
-/* 日本語の名言 */
 .quote-jp {
   font-weight: bold;
   color: #333333;
   margin-bottom: 8px;
 }
 
-/* 作者名（ピカソなど） */
 .quote-author {
   font-size: 0.8em;
   color: #888888;
-  text-align: right; /* 作者名を右寄せにする */
+  text-align: right;
 }
 
-/* 一番下の「© 2026 ひかりARTMUSEUM」 */
 .footer-bottom {
-  font-size: 0.75rem; /* コピーライトは一番小さくするのが一般的です */
+  font-size: 0.75rem;
   color: #999999;
   margin-top: 20px;
+}
+
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  border: 2px solid #eee;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
