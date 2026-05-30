@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, useParams } from 'react-router-dom';
 import './App.css';
 
 interface Artwork {
@@ -10,36 +11,11 @@ interface Artwork {
   createdAt: string;
 }
 
-// 🎨 美術館の名言リスト
-const MUSEUM_QUOTES = [
-  {
-    en: "Every child is an artist. The problem is how to remain an artist once we grow up.",
-    jp: "すべての子供はアーティストである。問題は、大人になってもアーティストでいられるかどうかだ。",
-    author: "パブロ・ピカソ"
-  },
-  {
-    en: "It took me four years to paint like Raphael, but a lifetime to paint like a child.",
-    jp: "ラファエロのように描くには4年かかったが、子供のように描くには一生かかった。",
-    author: "パブロ・ピカソ"
-  },
-  {
-    en: "If you truly love nature, you will find beauty everywhere.",
-    jp: "自然を心から愛していれば、どこにでも美しさを見つけることができる。",
-    author: "フィンセント・ファン・ゴッホ"
-  },
-  {
-    en: "Have no fear of perfection, you'll never reach it.",
-    jp: "完璧を恐れるな。どうせ到達できないのだから。",
-    author: "サルバドール・ダリ"
-  }
-];
-
-// --- 🌟 1. 管理センター ---
 const EXHIBITION_SCHEDULE = [
   {
     start: new Date(2026, 3, 20),
     end: new Date(2026, 3, 30),
-    category: '動物',
+    category: 'animal',
     message: '🦒 ただいま「動物の企画展」をはじめました！ぜひ見てね！🐘',
     type: 'info'
   },
@@ -59,28 +35,25 @@ const EXHIBITION_SCHEDULE = [
   },
   {
     start: new Date(2026, 5, 1),
-    end: new Date(2026, 5, 20),
-    category: '6月の企画展',
-    message: '😃ただいま、初めて作った〇〇をテーマにしてはじめて展を開催しています☆彡',
+    end: new Date(2026, 5, 21),
+    category: 'first',
+    message: '😃６月は、初めて作った〇〇をテーマにして「はじめて展」を開催しています🎂Happy Birthday!',
     type: 'special'
   }
 ];
 
 const EXHIBITION_NAMES: Record<string, string> = {
   '5月の企画展': 'すきなキャラクター展',
-  '工作': 'ひかりの工作コーナー',
-  '動物': 'だいすき動物展',
-  '6月の企画展': 'はじめて展',
+  'craft': 'ひかりの工作コーナー',
+  'animal': 'だいすき動物展',
+  'first': 'はじめて展',
 };
 
-const PERMANENT_CATEGORIES = ['動物']; 
-
+const PERMANENT_CATEGORIES = ['animal'];
 
 function ArtCard({ art }: { art: Artwork }) {
-  // この絵「専用」のいいねメモ帳
   const [likes, setLikes] = useState(0);
 
-  // いいねの数によってメッセージを変える
   let message = "";
   if (likes >= 10) {
     message = "✨ ありがとう！（照） ✨";
@@ -98,7 +71,6 @@ function ArtCard({ art }: { art: Artwork }) {
         {art.comments && <div className="art-comment"><p>「{art.comments}」</p></div>}
       </div>
 
-      {/* 👏 いいねボタンエリア */}
       <div className="interaction-area" style={{ marginTop: '10px', textAlign: 'center' }}>
         <button 
           className="like-btn" 
@@ -118,7 +90,6 @@ function ArtCard({ art }: { art: Artwork }) {
           👏 いいね！ {likes > 0 && `(${likes})`}
         </button>
         
-        {/* メッセージがある時だけ表示 */}
         {message && (
           <p className="like-message" style={{ color: '#d1487b', fontWeight: 'bold', marginTop: '8px' }}>
             {message}
@@ -128,19 +99,87 @@ function ArtCard({ art }: { art: Artwork }) {
     </article>
   );
 }
-// =========================================================================
 
+function ExhibitionRoom({ publicArtworks, categories, activeEvent }: any) {
+  const { categoryId } = useParams(); 
+  const activeCategory = categoryId || null;
 
-// --- ここから下がメインのアプリ（美術館全体） ---
-export default function App() {
-  const [artworks, setArtworks] = useState<Artwork[] | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [randomQuote, setRandomQuote] = useState<{en: string, jp: string, author: string} | null>(null);
+  const displayArtworks = activeCategory === null
+    ? publicArtworks.slice(0, 1) 
+    : publicArtworks.filter((art: any) => {
+        const raw = art.category;
+        const catName = typeof raw === 'string' ? raw : (Array.isArray(raw) ? raw[0] : raw?.name);
+        return catName === activeCategory;
+      });
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * MUSEUM_QUOTES.length);
-    setRandomQuote(MUSEUM_QUOTES[randomIndex]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeCategory]);
 
+  return (
+    <>
+      <nav className="exhibition-menu">
+        <Link 
+          to="/" 
+          className={`btn-default ${activeCategory === null ? 'active' : ''}`}
+          style={{ textDecoration: 'none' }}
+        >
+          最新の作品
+        </Link>
+
+        {categories.map((cat: string) => {
+          const isPermanent = PERMANENT_CATEGORIES.includes(cat);
+          let buttonClass = isPermanent ? 'btn-permanent' : 'btn-special';
+          if (activeCategory === cat) buttonClass += ' active';
+
+          return (
+            <Link 
+              key={cat} 
+              to={`/room/${cat}`} 
+              className={buttonClass}
+              style={{ textDecoration: 'none' }}
+            >
+              {EXHIBITION_NAMES[cat] || cat}
+            </Link>
+          );
+        })}
+      </nav>
+
+      <main className="museum-main">
+        {activeEvent && (
+          <div className={`special-banner ${activeEvent.type}`}>
+            {activeEvent.message}
+          </div>
+        )}
+
+        {activeCategory && (
+          <div className="section-title">
+            <h2>{EXHIBITION_NAMES[activeCategory] || activeCategory}</h2>
+          </div>
+        )}
+
+        <div className={activeCategory === null ? 'spotlight-grid' : 'gallery-grid'}>
+          {displayArtworks.map((art: any) => (
+            <ArtCard key={art.id} art={art} />
+          ))}
+        </div>
+
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} 
+          className="scroll-to-top-btn"
+          title="一番上に戻る"
+        >
+          ⬆️
+        </button>
+      </main>
+    </>
+  );
+}
+
+export default function App() {
+  const [artworks, setArtworks] = useState<Artwork[] | null>(null);
+  
+  useEffect(() => {
     const SERVICE_DOMAIN = 'y3scy93hal';
     const API_KEY = 'rSrEE2AyKedsAWFehddImURmlgNucTzu8PHB';
     fetch(`https://${SERVICE_DOMAIN}.microcms.io/api/v1/artworks?limit=100`, {
@@ -148,7 +187,7 @@ export default function App() {
     })
       .then(res => res.json())
       .then(data => setArtworks(data.contents))
-      .catch(err => console.error("エラー:", err));
+      .catch(err => console.error(err));
   }, []);
 
   const getCategoryName = (raw: any): string | null => {
@@ -177,69 +216,30 @@ export default function App() {
     new Set(publicArtworks.map(art => getCategoryName(art.category)).filter(Boolean) as string[])
   );
 
-  const displayArtworks = activeCategory === null
-    ? publicArtworks.slice(0, 1) 
-    : publicArtworks.filter(art => getCategoryName(art.category) === activeCategory);
-
   return (
-    <div className="museum-container">
-      <header className="museum-header">
-        <h1>ひかりARTMUSEUM</h1>
-      </header>
+    <BrowserRouter>
+      <div className="museum-container">
+        <header className="museum-header">
+          <h1>ひかりARTMUSEUM</h1>
+        </header>
 
-      <nav className="exhibition-menu">
-        <button 
-          className={`btn-default ${activeCategory === null ? 'active' : ''}`} 
-          onClick={() => setActiveCategory(null)}
-        >
-          最新の作品
-        </button>
-        {categories.map(cat => {
-          const isPermanent = PERMANENT_CATEGORIES.includes(cat);
-          let buttonClass = isPermanent ? 'btn-permanent' : 'btn-special';
-          if (activeCategory === cat) buttonClass += ' active';
+        <Routes>
+          <Route 
+            path="/" 
+            element={<ExhibitionRoom publicArtworks={publicArtworks} categories={categories} activeEvent={activeEvent} />} 
+          />
+          <Route 
+            path="/room/:categoryId" 
+            element={<ExhibitionRoom publicArtworks={publicArtworks} categories={categories} activeEvent={activeEvent} />} 
+          />
+        </Routes>
 
-          return (
-            <button key={cat} className={buttonClass} onClick={() => setActiveCategory(cat)}>
-              {EXHIBITION_NAMES[cat] || cat}
-            </button>
-          );
-        })}
-      </nav>
-
-      <main className="museum-main">
-        {activeEvent && (
-          <div className={`special-banner ${activeEvent.type}`}>
-            {activeEvent.message}
+        <footer className="museum-footer">
+          <div className="footer-bottom">
+            <p>© 2026 ひかりARTMUSEUM</p>
           </div>
-        )}
-
-        {activeCategory && (
-          <div className="section-title">
-            <h2>{EXHIBITION_NAMES[activeCategory] || activeCategory}</h2>
-          </div>
-        )}
-
-        <div className={activeCategory === null ? 'spotlight-grid' : 'gallery-grid'}>
-          {displayArtworks.map((art) => (
-            /* 🌟 ここで先ほど作った「ArtCard」を呼び出します！ */
-            <ArtCard key={art.id} art={art} />
-          ))}
-        </div>
-      </main>
-
-      <footer className="museum-footer">
-        {randomQuote && (
-          <div className="quote-container">
-            <p className="quote-en">"{randomQuote.en}"</p>
-            <p className="quote-jp">「{randomQuote.jp}」</p>
-            <p className="quote-author">— {randomQuote.author}</p>
-          </div>
-        )}
-        <div className="footer-bottom">
-          <p>© 2026 ひかりARTMUSEUM</p>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </BrowserRouter>
   );
 }
