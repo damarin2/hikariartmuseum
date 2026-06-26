@@ -263,3 +263,268 @@ body {
   transform: translateY(-3px);
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
+
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.navbar-logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #eb6e4b;
+  text-decoration: none;
+}
+
+/* 📱 スマホ画面（幅が768px以下の時） */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block;
+    background: transparent; /* 🌟 ダサいグレーの背景を消す！ */
+    border: none;            /* 🌟 ボタンの枠線を完全に消す！ */
+    font-size: 2rem;
+    color: #333;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .navbar-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    
+    /* 🌟 ここが開閉の魔法！ 普段は高さを 0 にして完全に隠しておく */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  /* 🌟 メニューが開いた時（isOpenがtrueになった時） */
+  .navbar-links.open {
+    max-height: 500px; /* メニューがスーッと下りてくる */
+  }
+
+  .navbar-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: center;
+  }
+}
+
+/* 💻 PC画面（幅が769px以上の時） */
+@media (min-width: 769px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .hamburger-btn {
+    display: none; /* 🌟 PCの時はハンバーガーを完全に消去する */
+  }
+
+  .navbar-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .navbar-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .navbar-links a:hover {
+    background: #fff0eb;
+  }
+}
+/* ==========================================
+   🦄 全館共通：お出迎えマスコット（右下）
+   ========================================== */
+.corner-mascot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none; /* マスコットの後ろにある絵も問題なくタップできます */
+}
+
+/* 💬 吹き出し */
+.mascot-speech-bubble {
+  background-color: #ffffff;
+  color: #eb6e4b;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 12px 18px;
+  border-radius: 20px;
+  border: 2px solid #eb6e4b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+  margin-right: 15px;
+  position: relative;
+  opacity: 0;
+  animation: popInBubble 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
+}
+
+/* 吹き出しのしっぽ（▼） */
+.mascot-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 25px;
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #eb6e4b transparent transparent transparent;
+  display: block;
+  width: 0;
+}
+
+/* 🦄 マスコット本体の浮遊アニメーション */
+.mascot-body {
+  animation: 
+    slideInRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+    floatCorner 2.5s ease-in-out infinite 0.6s;
+}
+
+.mascot-icon {
+  font-size: 7rem;
+  display: inline-block;
+  transform: scaleX(-1); /* 画面中央を向くように反転 */
+}
+
+/* 退場アニメーション */
+.mascot-exit {
+  animation: slideOutRight 0.8s ease-in forwards;
+}
+
+/* --- アニメーションのキーフレーム定義 --- */
+@keyframes slideInRight {
+  0% { transform: translateX(100px) scale(0.5); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+@keyframes popInBubble {
+  0% { transform: scale(0.5) translateY(10px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes floatCorner {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes slideOutRight {
+  to { transform: translateX(150px) scale(0.8); opacity: 0; }
+}
+
+
+.frame-wrapper {
+  padding: 16px; /* 額縁の太さ */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: inline-block;
+  width: 100%; /* 中のArtCardがはみ出さないように幅を合わせる */
+  box-sizing: border-box;
+}
+
+
+.inner-mat {
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08); /* 内側に少し影をつけて立体感を出す */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.theme-candy {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #ffe6eb, /* パステルピンク */
+    #ffe6eb 15px,
+    #ffffff 15px, /* 白 */
+    #ffffff 30px
+  );
+  border: 4px solid #ff69b4; /* 可愛いピンクの縁取り */
+}
+
+
+.theme-classic {
+  background-color: #f8f9fa; /* 邪魔をしない落ち着いた薄いグレー */
+  border: 4px solid #eb6e4b; /* アプリのテーマカラー（オレンジなど） */
+}
+
+
+/* ==========================================
+   🚶‍♂️ 右下に固定されて歩いてくる「ARIGATO」
+   ========================================== */
+.walking-text-container {
+  /* 画面の右下に位置をガッチリ固定します */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999; /* 他の絵の後ろに隠れないように手前に出す */
+
+  display: inline-flex;
+  gap: 4px; /* 文字同士の隙間 */
+  padding: 10px;
+  pointer-events: none; /* 文字の後ろにあるボタンも邪魔せず押せるようにする */
+}
+
+.walking-letter {
+  display: inline-block;
+  font-size: 2.5rem; /* 右下で邪魔にならない、可愛いサイズ感 */
+  font-weight: bold;
+  color: #eb6e4b; /* アプリに合わせたパステルオレンジ */
+  text-shadow: 2px 2px 0px #ffffff; /* 重なっても見やすいように白いフチドリをつける */
+  
+  /* 最初は透明にしておく */
+  opacity: 0; 
+  animation: walkIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 🌟 トコトコ歩いてくるアニメーションの動き */
+@keyframes walkIn {
+  0% {
+    opacity: 0;
+    /* 左下から、少し後ろに傾いた状態でスタート */
+    transform: translateX(-30px) translateY(20px) rotate(-15deg);
+  }
+  50% {
+    opacity: 1;
+    /* 上にジャンプしながら、前に傾く（足を踏み出すような動き） */
+    transform: translateX(0px) translateY(-20px) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    /* 元の位置に着地して、まっすぐ立つ */
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+}
