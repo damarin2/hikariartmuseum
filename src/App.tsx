@@ -5,6 +5,7 @@ import ScratchArtRoom from './components/ScratchArtRoom';
 import NewsList from './components/NewsList';
 import NavigationBar from './components/NavigationBar';
 import CornerMascot from './components/CornerMascot';
+import GhostExhibition from './components/GhostExhibition';
 import type { Artwork } from './types';
 import { EXHIBITION_SCHEDULE, PERMANENT_CATEGORIES } from './constants';
 import './App.css';
@@ -45,6 +46,8 @@ export default function App() {
     return false;
   });
 
+  const ghostArts = artworks.filter(art => getCategoryName(art.category) === 'august-ghost');
+
   const categories: string[] = Array.from(
     new Set(publicArtworks.map(art => getCategoryName(art.category)).filter(Boolean) as string[])
   );
@@ -71,6 +74,10 @@ export default function App() {
           <Route 
             path="/news" 
             element={<NewsList />} 
+          />
+          <Route 
+            path="/ghost" 
+            element={<GhostExhibition ghostArts={ghostArts} />} 
           />
         </Routes>
 
