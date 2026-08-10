@@ -532,6 +532,7 @@ body {
 /* テロップの外枠（画面外にはみ出た文字を隠す） */
 .ticker-wrap {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
   background-color: #111; /* お化け展っぽく暗い背景（お好みで変更してください） */
   color: #fff;
