@@ -528,3 +528,38 @@ body {
     transform: translateX(0) translateY(0) rotate(0deg);
   }
 }
+
+/* テロップの外枠（画面外にはみ出た文字を隠す） */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: #111; /* お化け展っぽく暗い背景（お好みで変更してください） */
+  color: #fff;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+/* アニメーションの設定 */
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%; /* スタート位置を画面の右端にする */
+  animation: ticker 15s linear infinite; /* 15秒かけて一定速度でループ */
+}
+
+/* テロップのテキスト調整 */
+.ticker-item {
+  font-size: 1rem;
+  font-weight: bold;
+  padding-right: 2rem;
+}
+
+/* 右から左へ移動するキーフレーム */
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -4,7 +4,6 @@ import ExhibitionRoom from './components/ExhibitionRoom';
 import ScratchArtRoom from './components/ScratchArtRoom';
 import NewsList from './components/NewsList';
 import NavigationBar from './components/NavigationBar';
-import CornerMascot from './components/CornerMascot';
 import GhostExhibition from './components/GhostExhibition';
 import type { Artwork } from './types';
 import { EXHIBITION_SCHEDULE, PERMANENT_CATEGORIES } from './constants';
@@ -32,6 +31,8 @@ export default function App() {
   if (!artworks) return <div className="loading-screen">作品搬入中...</div>;
 
   const today = new Date();
+  
+  // 今日の日付が start と end の間にあるイベントを探す
   const activeEvent = EXHIBITION_SCHEDULE.find(ev => {
     const endOfDay = new Date(ev.end);
     endOfDay.setHours(23, 59, 59, 999);
@@ -55,8 +56,20 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="museum-container">
-        <CornerMascot />
         <NavigationBar categories={categories} />
+
+        {/* ▼▼▼ 追加：テロップ（マーキー）部分 ▼▼▼ */}
+        {/* 開催中のイベントがあり、かつ message が設定されていれば表示する */}
+        {activeEvent && activeEvent.message && (
+          <div className="ticker-wrap">
+            <div className="ticker-move">
+              <span className="ticker-item">
+                {activeEvent.message}
+              </span>
+            </div>
+          </div>
+        )}
+        {/* ▲▲▲ 追加ここまで ▲▲▲ */}
 
         <Routes>
           <Route 

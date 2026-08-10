@@ -19,7 +19,7 @@ interface SpecialLink {
   end: Date;
 }
 
-export default function ExhibitionRoom({ publicArtworks, categories, activeEvent }: ExhibitionRoomProps) {
+export default function ExhibitionRoom({ publicArtworks, categories }: ExhibitionRoomProps) {
   const { categoryId } = useParams(); 
   const activeCategory = categoryId || null;
 
@@ -83,11 +83,13 @@ export default function ExhibitionRoom({ publicArtworks, categories, activeEvent
       </nav>
 
       <main className="museum-main">
+        {/*
         {activeEvent && (
           <div className={`special-banner ${activeEvent.type}`}>
             {activeEvent.message}
           </div>
         )}
+       */}
 
         {activeCategory && (
           <div className="section-title">

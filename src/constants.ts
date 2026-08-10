@@ -2,10 +2,10 @@ import type { ExhibitionEvent } from './types';
 
 export const EXHIBITION_SCHEDULE: ExhibitionEvent[] = [
   {
-    start: new Date(2026, 3, 20),
-    end: new Date(2026, 3, 30),
-    category: 'animal',
-    message: '🦒 ただいま「動物の企画展」をはじめました！ぜひ見てね！🐘',
+    start: new Date(2026, 8, 1),
+    end: new Date(2026, 8, 30),
+    category: 'letter',
+    message: '💌 ９月は、「お手紙展」を開催しています！ぜひ見てね！💌',
     type: 'info'
   },
   {
