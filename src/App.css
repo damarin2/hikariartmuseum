@@ -3,6 +3,8 @@ body {
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
   background-color: #f9f7f2;
   color: #333;
+  /* 🌟 追加：画面が横に引っ張られて小さくなる（PC表示になる）のを完全に防ぐバリア */
+  overflow-x: hidden; 
 }
 
 .museum-container {
@@ -291,8 +293,8 @@ body {
 @media (max-width: 768px) {
   .hamburger-btn {
     display: block;
-    background: transparent; /* 🌟 ダサいグレーの背景を消す！ */
-    border: none;            /* 🌟 ボタンの枠線を完全に消す！ */
+    background: transparent;
+    border: none;
     font-size: 2rem;
     color: #333;
     cursor: pointer;
@@ -309,15 +311,13 @@ body {
     background-color: #ffffff;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
     
-    /* 🌟 ここが開閉の魔法！ 普段は高さを 0 にして完全に隠しておく */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
   }
 
-  /* 🌟 メニューが開いた時（isOpenがtrueになった時） */
   .navbar-links.open {
-    max-height: 500px; /* メニューがスーッと下りてくる */
+    max-height: 500px;
   }
 
   .navbar-links a {
@@ -339,7 +339,7 @@ body {
   }
   
   .hamburger-btn {
-    display: none; /* 🌟 PCの時はハンバーガーを完全に消去する */
+    display: none;
   }
 
   .navbar-links {
@@ -360,6 +360,7 @@ body {
     background: #fff0eb;
   }
 }
+
 /* ==========================================
    🦄 全館共通：お出迎えマスコット（右下）
    ========================================== */
@@ -371,10 +372,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  pointer-events: none; /* マスコットの後ろにある絵も問題なくタップできます */
+  pointer-events: none;
 }
 
-/* 💬 吹き出し */
 .mascot-speech-bubble {
   background-color: #ffffff;
   color: #eb6e4b;
@@ -391,7 +391,6 @@ body {
   animation: popInBubble 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
 }
 
-/* 吹き出しのしっぽ（▼） */
 .mascot-speech-bubble::after {
   content: '';
   position: absolute;
@@ -404,7 +403,6 @@ body {
   width: 0;
 }
 
-/* 🦄 マスコット本体の浮遊アニメーション */
 .mascot-body {
   animation: 
     slideInRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
@@ -414,15 +412,13 @@ body {
 .mascot-icon {
   font-size: 7rem;
   display: inline-block;
-  transform: scaleX(-1); /* 画面中央を向くように反転 */
+  transform: scaleX(-1);
 }
 
-/* 退場アニメーション */
 .mascot-exit {
   animation: slideOutRight 0.8s ease-in forwards;
 }
 
-/* --- アニメーションのキーフレーム定義 --- */
 @keyframes slideInRight {
   0% { transform: translateX(100px) scale(0.5); opacity: 0; }
   100% { transform: translateX(0) scale(1); opacity: 1; }
@@ -442,120 +438,110 @@ body {
   to { transform: translateX(150px) scale(0.8); opacity: 0; }
 }
 
-
 .frame-wrapper {
-  padding: 16px; /* 額縁の太さ */
+  padding: 16px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   display: inline-block;
-  width: 100%; /* 中のArtCardがはみ出さないように幅を合わせる */
+  width: 100%;
   box-sizing: border-box;
 }
-
 
 .inner-mat {
   background-color: #ffffff;
   padding: 8px;
   border-radius: 8px;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08); /* 内側に少し影をつけて立体感を出す */
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
 .theme-candy {
   background-image: repeating-linear-gradient(
     45deg,
-    #ffe6eb, /* パステルピンク */
+    #ffe6eb,
     #ffe6eb 15px,
-    #ffffff 15px, /* 白 */
+    #ffffff 15px,
     #ffffff 30px
   );
-  border: 4px solid #ff69b4; /* 可愛いピンクの縁取り */
+  border: 4px solid #ff69b4;
 }
-
 
 .theme-classic {
-  background-color: #f8f9fa; /* 邪魔をしない落ち着いた薄いグレー */
-  border: 4px solid #eb6e4b; /* アプリのテーマカラー（オレンジなど） */
+  background-color: #f8f9fa;
+  border: 4px solid #eb6e4b;
 }
-
 
 /* ==========================================
    🚶‍♂️ 右下に固定されて歩いてくる「ARIGATO」
    ========================================== */
 .walking-text-container {
-  /* 画面の右下に位置をガッチリ固定します */
   position: fixed;
   bottom: 30px;
   right: 30px;
-  z-index: 9999; /* 他の絵の後ろに隠れないように手前に出す */
-
+  z-index: 9999;
   display: inline-flex;
-  gap: 4px; /* 文字同士の隙間 */
+  gap: 4px;
   padding: 10px;
-  pointer-events: none; /* 文字の後ろにあるボタンも邪魔せず押せるようにする */
+  pointer-events: none;
 }
 
 .walking-letter {
   display: inline-block;
-  font-size: 2.5rem; /* 右下で邪魔にならない、可愛いサイズ感 */
+  font-size: 2.5rem;
   font-weight: bold;
-  color: #eb6e4b; /* アプリに合わせたパステルオレンジ */
-  text-shadow: 2px 2px 0px #ffffff; /* 重なっても見やすいように白いフチドリをつける */
-  
-  /* 最初は透明にしておく */
+  color: #eb6e4b;
+  text-shadow: 2px 2px 0px #ffffff;
   opacity: 0; 
   animation: walkIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* 🌟 トコトコ歩いてくるアニメーションの動き */
 @keyframes walkIn {
   0% {
     opacity: 0;
-    /* 左下から、少し後ろに傾いた状態でスタート */
     transform: translateX(-30px) translateY(20px) rotate(-15deg);
   }
   50% {
     opacity: 1;
-    /* 上にジャンプしながら、前に傾く（足を踏み出すような動き） */
     transform: translateX(0px) translateY(-20px) rotate(10deg);
   }
   100% {
     opacity: 1;
-    /* 元の位置に着地して、まっすぐ立つ */
     transform: translateX(0) translateY(0) rotate(0deg);
   }
 }
 
-/* テロップの外枠（画面外にはみ出た文字を隠す） */
+/* ==========================================
+   👻 動くテロップ（マーキー）
+   ========================================== */
 .ticker-wrap {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw;
   overflow: hidden;
-  background-color: #111; /* お化け展っぽく暗い背景（お好みで変更してください） */
+  background-color: #111;
   color: #fff;
   padding: 8px 0;
   box-sizing: border-box;
+  /* 🌟 追加：はみ出た要素を確実に隠すための指定 */
+  position: relative;
 }
 
-/* アニメーションの設定 */
 .ticker-move {
   display: inline-block;
   white-space: nowrap;
-  padding-left: 100%; /* スタート位置を画面の右端にする */
-  animation: ticker 15s linear infinite; /* 15秒かけて一定速度でループ */
+  padding-left: 100%;
+  animation: ticker 15s linear infinite;
+  /* 🌟 追加：アニメーションを滑らかにするおまじない */
+  will-change: transform;
 }
 
-/* テロップのテキスト調整 */
 .ticker-item {
   font-size: 1rem;
   font-weight: bold;
   padding-right: 2rem;
 }
 
-/* 右から左へ移動するキーフレーム */
 @keyframes ticker {
   0% {
     transform: translateX(0);
