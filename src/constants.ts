@@ -5,7 +5,7 @@ export const EXHIBITION_SCHEDULE: ExhibitionEvent[] = [
     start: new Date(2026, 8, 1),
     end: new Date(2026, 8, 30),
     category: 'letter',
-    message: '💌 ９月は、「お手紙展」を開催しています！ぜひ見てね！💌',
+    message: '💌 ９月は、「プレゼント展」を開催しています！ぜひ見てね！💌',
     type: 'info'
   },
   {
@@ -32,7 +32,7 @@ export const EXHIBITION_SCHEDULE: ExhibitionEvent[] = [
   // 🌟 ここに8月（月番号：7）の「おばけ展」のスケジュールを追加！
   {
     start: new Date(2026, 7, 1),   // 2026年8月1日
-    end: new Date(2026, 7, 31),    // 2026年8月31日
+    end: new Date(2026, 7, 20),    // 2026年8月20日
     category: 'august-ghost',
     message: '👻 8月限定！よるの びじゅつかんで「おばけ展」を開催中！👻',
     type: 'special'

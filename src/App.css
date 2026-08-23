@@ -1,9 +1,12 @@
+/* ==========================================
+   1. ベース設定（全体）
+   ========================================== */
 body {
   margin: 0;
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
   background-color: #f9f7f2;
   color: #333;
-  /* 🌟 追加：画面が横に引っ張られて小さくなる（PC表示になる）のを完全に防ぐバリア */
+  /* 🌟 画面が横に引っ張られて小さくなる（PC表示になる）のを完全に防ぐバリア */
   overflow-x: hidden; 
 }
 
@@ -13,6 +16,18 @@ body {
   padding: 20px;
 }
 
+.loading-screen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f7f2;
+}
+
+/* ==========================================
+   2. ヘッダー・フッター
+   ========================================== */
 .museum-header {
   text-align: center;
   padding: 40px 0;
@@ -27,6 +42,42 @@ body {
   color: #5d5c58;
 }
 
+.footer-bottom {
+  font-size: 0.75rem;
+  color: #999999;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* ==========================================
+   3. ナビゲーションバー
+   ========================================== */
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+}
+
+.navbar-logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #eb6e4b;
+  text-decoration: none;
+}
+
+/* ==========================================
+   4. 展示メニューボタン
+   ========================================== */
 .exhibition-menu::before {
   content: "👇 見たい部屋のボタンをクリック 👇";
   width: 100%;
@@ -69,13 +120,13 @@ body {
   box-shadow: none !important;
 }
 
+/* 各ボタンのカラー設定 */
 .exhibition-menu .btn-default {
   background: #fcf9f2;
   color: #7a6e5d;
   border-color: #d1c8b4;
   box-shadow: 0 5px 0 #d1c8b4;
 }
-
 .exhibition-menu .btn-default.active {
   background-color: #eb6e4b;
   color: white;
@@ -89,7 +140,6 @@ body {
   border-color: #8fba8f;
   box-shadow: 0 5px 0 #8fba8f;
 }
-
 .exhibition-menu .btn-permanent.active {
   background-color: #559e55;
   color: white;
@@ -103,7 +153,6 @@ body {
   border-color: #ff9eb0;
   box-shadow: 0 5px 0 #ff9eb0;
 }
-
 .exhibition-menu .btn-special.active {
   background-color: #ff6b8b;
   color: white;
@@ -111,6 +160,9 @@ body {
   box-shadow: 0 5px 0 #b33956;
 }
 
+/* ==========================================
+   5. バナーとギャラリー（作品一覧）
+   ========================================== */
 .special-banner {
   padding: 20px;
   border-radius: 12px;
@@ -150,6 +202,7 @@ body {
   gap: 30px;
 }
 
+/* 作品カード */
 .art-card {
   background: white;
   padding: 15px;
@@ -198,20 +251,9 @@ body {
   text-align: right;
 }
 
-.loading-screen {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9f7f2;
-}
-
-@media (max-width: 600px) {
-  .museum-header h1 { font-size: 1.8rem; }
-  .gallery-grid { grid-template-columns: 1fr; }
-}
-
+/* ==========================================
+   6. 引用・額縁コンポーネント
+   ========================================== */
 .quote-container {
   font-size: 0.9rem;
   line-height: 1.5;
@@ -236,12 +278,38 @@ body {
   text-align: right;
 }
 
-.footer-bottom {
-  font-size: 0.75rem;
-  color: #999999;
-  margin-top: 20px;
+.frame-wrapper {
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+.inner-mat {
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-candy {
+  background-image: repeating-linear-gradient(45deg, #ffe6eb, #ffe6eb 15px, #ffffff 15px, #ffffff 30px);
+  border: 4px solid #ff69b4;
+}
+
+.theme-classic {
+  background-color: #f8f9fa;
+  border: 4px solid #eb6e4b;
+}
+
+/* ==========================================
+   7. 各種ボタン・アニメーション
+   ========================================== */
 .scroll-to-top-btn {
   position: fixed;
   bottom: 20px;
@@ -266,31 +334,156 @@ body {
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
-.navbar {
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 0 20px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.navbar-header {
+/* お出迎えマスコット */
+.corner-mascot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 60px;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
 }
 
-.navbar-logo {
-  font-size: 1.2rem;
+.mascot-speech-bubble {
+  background-color: #ffffff;
+  color: #eb6e4b;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 12px 18px;
+  border-radius: 20px;
+  border: 2px solid #eb6e4b;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 10px;
+  margin-right: 15px;
+  position: relative;
+  opacity: 0;
+  animation: popInBubble 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
+}
+
+.mascot-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 25px;
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #eb6e4b transparent transparent transparent;
+  display: block;
+  width: 0;
+}
+
+.mascot-body {
+  animation: slideInRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, floatCorner 2.5s ease-in-out infinite 0.6s;
+}
+
+.mascot-icon {
+  font-size: 7rem;
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+.mascot-exit {
+  animation: slideOutRight 0.8s ease-in forwards;
+}
+
+@keyframes slideInRight {
+  0% { transform: translateX(100px) scale(0.5); opacity: 0; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes popInBubble {
+  0% { transform: scale(0.5) translateY(10px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+@keyframes floatCorner {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes slideOutRight {
+  to { transform: translateX(150px) scale(0.8); opacity: 0; }
+}
+
+/* 歩いてくるARIGATOテキスト */
+.walking-text-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  display: inline-flex;
+  gap: 4px;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.walking-letter {
+  display: inline-block;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #eb6e4b;
-  text-decoration: none;
+  text-shadow: 2px 2px 0px #ffffff;
+  opacity: 0; 
+  animation: walkIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
+@keyframes walkIn {
+  0% { opacity: 0; transform: translateX(-30px) translateY(20px) rotate(-15deg); }
+  50% { opacity: 1; transform: translateX(0px) translateY(-20px) rotate(10deg); }
+  100% { opacity: 1; transform: translateX(0) translateY(0) rotate(0deg); }
+}
+
+/* ==========================================
+   8. 🎀 かわいいテロップ（マーキー） 🎀
+   ========================================== */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* かわいいデザインの適用 */
+.cute-ticker {
+  background-color: #fff0f5; /* 淡いピンク */
+  border: 3px dashed #ffb6c1; /* かわいい点線 */
+  border-radius: 20px; /* 角丸 */
+  margin: 15px auto;
+  width: 90%;
+  max-width: 800px;
+  padding: 10px 0;
+  box-shadow: 0 4px 8px rgba(255, 182, 193, 0.4); /* ふんわり影 */
+}
+
+.ticker-move {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: ticker 15s linear infinite;
+  will-change: transform; /* アニメーションを滑らかにするおまじない */
+}
+
+/* cute-tickerの中の文字設定 */
+.cute-ticker .ticker-item {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff69b4; /* 鮮やかなピンク */
+  padding: 0 2rem;
+  letter-spacing: 2px;
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ==========================================
+   9. レスポンシブ対応（スマホ・PCの切り替え）
+   ========================================== */
 /* 📱 スマホ画面（幅が768px以下の時） */
 @media (max-width: 768px) {
+  .museum-header h1 { font-size: 1.8rem; }
+  .gallery-grid { grid-template-columns: 1fr; }
+
   .hamburger-btn {
     display: block;
     background: transparent;
@@ -310,7 +503,6 @@ body {
     width: 100%;
     background-color: #ffffff;
     box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
@@ -358,195 +550,5 @@ body {
 
   .navbar-links a:hover {
     background: #fff0eb;
-  }
-}
-
-/* ==========================================
-   🦄 全館共通：お出迎えマスコット（右下）
-   ========================================== */
-.corner-mascot-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  pointer-events: none;
-}
-
-.mascot-speech-bubble {
-  background-color: #ffffff;
-  color: #eb6e4b;
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 12px 18px;
-  border-radius: 20px;
-  border: 2px solid #eb6e4b;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin-bottom: 10px;
-  margin-right: 15px;
-  position: relative;
-  opacity: 0;
-  animation: popInBubble 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s forwards;
-}
-
-.mascot-speech-bubble::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  right: 25px;
-  border-width: 10px 10px 0;
-  border-style: solid;
-  border-color: #eb6e4b transparent transparent transparent;
-  display: block;
-  width: 0;
-}
-
-.mascot-body {
-  animation: 
-    slideInRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-    floatCorner 2.5s ease-in-out infinite 0.6s;
-}
-
-.mascot-icon {
-  font-size: 7rem;
-  display: inline-block;
-  transform: scaleX(-1);
-}
-
-.mascot-exit {
-  animation: slideOutRight 0.8s ease-in forwards;
-}
-
-@keyframes slideInRight {
-  0% { transform: translateX(100px) scale(0.5); opacity: 0; }
-  100% { transform: translateX(0) scale(1); opacity: 1; }
-}
-
-@keyframes popInBubble {
-  0% { transform: scale(0.5) translateY(10px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
-}
-
-@keyframes floatCorner {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes slideOutRight {
-  to { transform: translateX(150px) scale(0.8); opacity: 0; }
-}
-
-.frame-wrapper {
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display: inline-block;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.inner-mat {
-  background-color: #ffffff;
-  padding: 8px;
-  border-radius: 8px;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.theme-candy {
-  background-image: repeating-linear-gradient(
-    45deg,
-    #ffe6eb,
-    #ffe6eb 15px,
-    #ffffff 15px,
-    #ffffff 30px
-  );
-  border: 4px solid #ff69b4;
-}
-
-.theme-classic {
-  background-color: #f8f9fa;
-  border: 4px solid #eb6e4b;
-}
-
-/* ==========================================
-   🚶‍♂️ 右下に固定されて歩いてくる「ARIGATO」
-   ========================================== */
-.walking-text-container {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 9999;
-  display: inline-flex;
-  gap: 4px;
-  padding: 10px;
-  pointer-events: none;
-}
-
-.walking-letter {
-  display: inline-block;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #eb6e4b;
-  text-shadow: 2px 2px 0px #ffffff;
-  opacity: 0; 
-  animation: walkIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes walkIn {
-  0% {
-    opacity: 0;
-    transform: translateX(-30px) translateY(20px) rotate(-15deg);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(0px) translateY(-20px) rotate(10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0) translateY(0) rotate(0deg);
-  }
-}
-
-/* ==========================================
-   👻 動くテロップ（マーキー）
-   ========================================== */
-.ticker-wrap {
-  width: 100%;
-  max-width: 100vw;
-  overflow: hidden;
-  background-color: #111;
-  color: #fff;
-  padding: 8px 0;
-  box-sizing: border-box;
-  /* 🌟 追加：はみ出た要素を確実に隠すための指定 */
-  position: relative;
-}
-
-.ticker-move {
-  display: inline-block;
-  white-space: nowrap;
-  padding-left: 100%;
-  animation: ticker 15s linear infinite;
-  /* 🌟 追加：アニメーションを滑らかにするおまじない */
-  will-change: transform;
-}
-
-.ticker-item {
-  font-size: 1rem;
-  font-weight: bold;
-  padding-right: 2rem;
-}
-
-@keyframes ticker {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
   }
 }

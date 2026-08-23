@@ -61,7 +61,7 @@ export default function App() {
         {/* ▼▼▼ 追加：テロップ（マーキー）部分 ▼▼▼ */}
         {/* 開催中のイベントがあり、かつ message が設定されていれば表示する */}
         {activeEvent && activeEvent.message && (
-          <div className="ticker-wrap">
+          <div className="ticker-wrap cute-ticker">
             <div className="ticker-move">
               <span className="ticker-item">
                 {activeEvent.message}
