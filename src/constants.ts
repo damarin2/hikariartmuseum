@@ -4,7 +4,7 @@ export const EXHIBITION_SCHEDULE: ExhibitionEvent[] = [
   {
     start: new Date(2026, 8, 1),
     end: new Date(2026, 8, 30),
-    category: 'letter',
+    category: 'sep-present',
     message: '💌 ９月は、「プレゼント展」を開催しています！ぜひ見てね！💌',
     type: 'info'
   },
@@ -44,6 +44,7 @@ export const EXHIBITION_NAMES: Record<string, string> = {
   'craft': 'ひかりの工作コーナー',
   'animal': 'だいすき動物展',
   'first': 'はじめて展',
+  'sep-present': 'プレゼント展',
   // 🌟 カテゴリー名と表示名を結びつける
   'august-ghost': 'ぷかぷか・おばけ展',
 };
