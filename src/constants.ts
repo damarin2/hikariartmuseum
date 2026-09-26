@@ -3,11 +3,18 @@ import type { ExhibitionEvent } from './types';
 export const EXHIBITION_SCHEDULE: ExhibitionEvent[] = [
   {
     start: new Date(2026, 8, 1),
-    end: new Date(2026, 8, 30),
+    end: new Date(2026, 8, 20),
     category: 'sep-present',
     message: '💌 ９月は、「プレゼント展」を開催しています！ぜひ見てね！💌',
     type: 'info'
   },
+  {
+  start: new Date(2026, 9, 1),   // 2026年9月1日
+  end: new Date(2026, 9, 31),   // 2026年12月31日
+  category: 'quiz',
+  message: '❓ 10月は「クイズ展」を開催中！あそんでみてね！',
+  type: 'special'
+},
   {
     start: new Date(2026, 4, 5),
     end: new Date(2026, 4, 5),
@@ -56,15 +63,21 @@ export const SPECIAL_LINKS = [
     path: '/scratch',
     label: '✨ スクラッチで遊ぶ ✨',
     color: '#ffd700',
-    start: new Date(2026, 6, 1), // 2026年7月1日
-    end: new Date(2026, 6, 31)   // 2026年7月31日
+    start: new Date(2026, 6, 1),
+    end: new Date(2026, 6, 31)
   },
-  // 🌟 メニューに「おばけ展」への特別ボタンを8月だけ表示する！
   {
     path: '/ghost',
     label: '👻 おばけ展にいく 👻',
-    color: '#a78bfa',            // 夜っぽい、優しいむらさき色
-    start: new Date(2026, 5, 1), // 2026年8月1日
-    end: new Date(2026, 5, 31)   // 2026年8月31日
+    color: '#a78bfa',
+    start: new Date(2026, 7, 1),
+    end: new Date(2026, 7, 31)
   },
+  {
+    path: '/quiz',
+    label: '❓ クイズ展',
+    color: '#ffe066',
+    start: new Date(2026, 9, 1),
+    end: new Date(2026, 9, 31)
+  }
 ];

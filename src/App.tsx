@@ -7,6 +7,7 @@ import NavigationBar from './components/NavigationBar';
 import GhostExhibition from './components/GhostExhibition';
 import type { Artwork } from './types';
 import { EXHIBITION_SCHEDULE, PERMANENT_CATEGORIES } from './constants';
+import SpecialQuizExhibition from "./components/SpecialQuizExhibition";
 import './App.css';
 
 export default function App() {
@@ -91,6 +92,9 @@ export default function App() {
           <Route 
             path="/ghost" 
             element={<GhostExhibition ghostArts={ghostArts} />} 
+          />
+          <Route 
+          path="/quiz" element={<SpecialQuizExhibition />} 
           />
         </Routes>
 
