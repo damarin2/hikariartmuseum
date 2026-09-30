@@ -7,7 +7,7 @@ export const specialExhibitionQuizzes = [
     question: "この絵を描く時に、最初に塗ったのは何色だったでしょうか？",
     choices: ["赤", "青", "黄色"],
     correctAnswer: "青",
-    explanation: "迷うことなく、青色から力強く塗り始めていました。" // 
+    explanation: "迷うことなく、〇色から力強く塗り始めていました。" // 
   },
   {
     id: "q2",
@@ -15,7 +15,7 @@ export const specialExhibitionQuizzes = [
     question: "この絵を描く時に、ひかりがずっと口ずさんでいた歌はなんでしょうか？",
     choices: ["さんぽ（トトロ）", "ホールニューワールド", "アンパンマンのマーチ"],
     correctAnswer: "ホールニューワールド",
-    explanation: "ご機嫌に「ホールニューワールド」を歌いながら描いていた思い出の一枚です。"
+    explanation: "ご機嫌に「〇〇」を歌いながら描いていた思い出の一枚です。"
   },
   {
     id: "q3",
@@ -23,7 +23,7 @@ export const specialExhibitionQuizzes = [
     question: "これはなんの動物でしょうか？",
     choices: ["くも", "あり", "かぶとむし"],
     correctAnswer: "あり",
-    explanation: "公園で一生懸命に捕まえた「あり」の姿を、画用紙いっぱいに表現してくれました。"
+    explanation: "公園で一生懸命に捕まえた「〇〇」の姿を、画用紙いっぱいに表現してくれました。"
   },
   {
     id: "q4",
@@ -31,7 +31,7 @@ export const specialExhibitionQuizzes = [
     question: "このてるてる坊主が、頭に被ってるのはなに？",
     choices: ["どんぐりの帽子", "ペットボトルのキャップ", "折り紙のぼうし"],
     correctAnswer: "ペットボトルのキャップ",
-    explanation: "ゴミ箱に捨てる前のキャップを見つけて、てるてる坊主に可愛い帽子を被せてあげていました。"
+    explanation: "ゴミ箱に捨てる前のキャップを見つけて、〇〇〇〇に可愛い帽子を被せてあげていました。"
   },
   {
     id: "q5",

@@ -39,7 +39,7 @@ export const EXHIBITION_SCHEDULE: ExhibitionEvent[] = [
   // 🌟 ここに8月（月番号：7）の「おばけ展」のスケジュールを追加！
   {
     start: new Date(2026, 7, 1),   // 2026年8月1日
-    end: new Date(2026, 7, 20),    // 2026年8月20日
+    end: new Date(2026, 7, 30),    // 2026年8月20日
     category: 'august-ghost',
     message: '👻 8月限定！よるの びじゅつかんで「おばけ展」を開催中！👻',
     type: 'special'

@@ -112,8 +112,9 @@ export default function ExhibitionRoom({ publicArtworks, categories }: Exhibitio
               // ArtCard を PictureFrame で包み込みます。
               // ループの一番外側の箱になるので、key={art.id} は PictureFrame の方に移動させます。
               <PictureFrame key={art.id} theme={frameTheme}>
-                <ArtCard art={art} />
+                <ArtCard art={art} hideExplanation={activeCategory === 'quiz'} />
               </PictureFrame>
+
             );
           })}
         </div>
